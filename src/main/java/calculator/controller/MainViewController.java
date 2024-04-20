@@ -20,19 +20,19 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
 
-    // TODO : Vérifier, utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
-    //  à l'intérieur de la classe de contrôleur.
-    // TODO : Traduire en anglais si jamais il y a du français
-
     public static final String STANDARD_MODE = "Standard";
     public static final String RATIONAL_MODE = "Rational";
     public static final String COMPLEX_MODE = "Complex";
+    public static final String CONVERSIONS_MODE = "Conversions";
+    public static final String TIME_MODE = "Time";
+    public static final String BOOLEAN_MODE = "Boolean";
+
     private static final Logger logger = LoggerFactory.getLogger(MainViewController.class);
 
     @FXML
     private BorderPane root;
     @FXML
-    private CheckMenuItem standardMode, rationalMode, complexMode;
+    private CheckMenuItem standardMode, rationalMode, complexMode, booleanMode, timeMode, conversionsMode;
     @FXML
     private Menu modeMenu, zoomMenu; // unused
     @FXML
@@ -52,10 +52,11 @@ public class MainViewController implements Initializable {
     private List<CheckMenuItem> modeMenuItems;
     private String currentMode;
     private boolean resetDisplay = false; // maybe protected variable
+    private boolean fromConversionsMode = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        modeMenuItems = List.of(standardMode, rationalMode, complexMode);
+        modeMenuItems = List.of(standardMode, rationalMode, complexMode, timeMode, conversionsMode);
         updateMode(STANDARD_MODE);
     }
 
@@ -94,6 +95,27 @@ public class MainViewController implements Initializable {
         }
     }
 
+    @FXML
+    private void onConversionsMode() {
+        if (!currentMode.equals(CONVERSIONS_MODE)) {
+            updateMode(CONVERSIONS_MODE);
+        }
+    }
+    
+    @FXML
+    private void onTimeMode() {
+        if (!currentMode.equals(TIME_MODE)) {
+            updateMode(TIME_MODE);
+        }
+    }
+
+    @FXML
+    private void onBooleanMode() {
+        if (!currentMode.equals(BOOLEAN_MODE)) {
+            updateMode(BOOLEAN_MODE);
+        }
+    }
+
     /**
      * Updates the current mode and associated buttons.
      *
@@ -118,12 +140,30 @@ public class MainViewController implements Initializable {
 
         if (resource == null) {
             logger.error("FXML file for " + mode + " mode not found : " + fxmlFile);
-            // Vous pouvez gérer l'erreur comme bon vous semble ici
-            // TODO : afficher une pop up erreur utilisateur?
         } else {
             try {
                 FXMLLoader loader = new FXMLLoader(resource);
-                GridPane modeGrid = loader.load();
+                GridPane modeGrid;
+                if (!fromConversionsMode && !mode.equals(CONVERSIONS_MODE)){
+                    modeGrid = loader.load();
+                } else {
+                    VBox topVBox = (VBox) root.getTop();
+                    if (fromConversionsMode) {
+                        modeGrid = loader.load();
+                        VBox displayVBox = this.displayContainer;
+                        topVBox.getChildren().set(1, displayVBox);
+                        fromConversionsMode = false;
+                    } else {
+                        BorderPane conversionsPane = loader.load();
+                        VBox conversionsVBox = (VBox) conversionsPane.getChildren().get(0);
+                        modeGrid = (GridPane) conversionsPane.getChildren().get(1);
+                        topVBox.getChildren().set(1, conversionsVBox);
+                        fromConversionsMode = true;
+                    }
+                    root.setTop(topVBox);
+                }
+
+                root.setCenter(modeGrid);
                 ModeController modeController = loader.getController();
 
                 // Resize the window to the mode controller's preferred size
@@ -135,8 +175,6 @@ public class MainViewController implements Initializable {
                 // Passing text fields to mode controllers
                 modeController.setDisplayTextField(display);
                 modeController.setExpressionTextField(expression);
-
-                root.setCenter(modeGrid);
             } catch (IOException e) {
                 logger.error("Error loading buttons for the" + mode + "mode.", e);
             }

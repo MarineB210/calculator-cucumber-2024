@@ -1,0 +1,19 @@
+.button, .text-field {
+    -fx-color: white;
+}
+
+#btnOpenParenthesis, #btnCloseParenthesis, #btnComma, #btnExtension1, #btnExtension2, #btnExtension3, #btnExtension4, #btnExtension5 {
+    -fx-color: #bdc3c7; /* Gris clair */
+}
+
+#btnClear {
+    -fx-color: #FF6347; /* Rouge tomate */
+}
+
+#btnNot, #btnAnd, #btnOr, #btnXor, #btnEquiv, #btnImply, #btnEquals {
+    -fx-color: #FFA500;
+}
+
+#btn0, #btn1, #btnEquals, #btnDelete {
+    -fx-color: #ecf0f1; /* Gris très clair */
+}

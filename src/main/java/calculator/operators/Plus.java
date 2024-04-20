@@ -20,7 +20,7 @@ import java.util.List;
 public final class Plus extends Operation
  {
 
-  /**
+     /**
    * Class constructor specifying a number of Expressions to add,
    * as well as the Notation used to represent the operation.
    *

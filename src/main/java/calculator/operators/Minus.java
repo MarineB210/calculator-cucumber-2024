@@ -19,6 +19,7 @@ import java.util.List;
 public final class Minus extends Operation
  {
 
+
   /**
    * Class constructor specifying a number of Expressions to subtract,
    * as well as the Notation used to represent the operation.
@@ -65,4 +66,5 @@ public final class Minus extends Operation
     }
     return new MyNumber(-l.getValue());
   }
+
 }

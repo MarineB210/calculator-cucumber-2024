@@ -2,12 +2,13 @@ package calculator;
 
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
+import calculator.numbers.MyTime;
 import visitor.Evaluator;
 
 
 /**
  * This class represents the core logic of a Calculator.
- * It can be used to print and evaluate arithmetic expressions.
+ * It can be used to print and evaluate expressions.
  *
  * @author tommens
  */
@@ -20,15 +21,6 @@ public class Calculator {
     public Calculator() {
         // Nothing to be done
     }
-
-    /*
-     For the moment the calculator only contains a print method and an eval method
-     It would be useful to complete this with a read method, so that we would be able
-     to implement a full REPL cycle (Read-Eval-Print loop) such as in Scheme, Python, R and other languages.
-     To do so would require to implement a method with the following signature, converting an input string
-     into an arithmetic expression:
-     public Expression read(String s)
-    */
 
     /**
      * Evaluates an arithmetic expression and returns its result
@@ -44,4 +36,14 @@ public class Calculator {
         return v.getResult();
     }
 
+    /**
+     * Evaluates a time expression and returns its result
+     * @param e the time Expression to be evaluated
+     * @return The result of the evaluation
+     */
+    public MyTime timeEval(Expression e){
+        Evaluator v = new Evaluator();
+        e.accept(v);
+        return v.getTimeResult();
+    }
 }

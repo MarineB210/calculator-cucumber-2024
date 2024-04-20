@@ -32,7 +32,8 @@ public final class Divides extends Operation {
 
 /**
    * The actual computation of the (binary) arithmetic division of two integers.
-   * If either of the numbers is a MyNotANumber instance or the second number is zero, the method returns a new MyNotANumber instance.
+   * If either of the numbers is a MyNotANumber instance or the second number is zero,
+   * the method returns a new MyNotANumber instance.
    *
    * @param l The first number.
    * @param r The second number that the first number should be divided by.
@@ -50,4 +51,5 @@ public final class Divides extends Operation {
       }
       return new MyNumber((double) l.getValue() / r.getValue());
   }
+
 }

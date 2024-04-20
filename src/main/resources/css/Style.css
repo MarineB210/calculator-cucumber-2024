@@ -10,7 +10,11 @@
     -fx-color: #FF6347; /* Rouge tomate */
 }
 
-#btnDivide, #btnMultiply, #btnMinus, #btnPlus, #btnFraction{
+#btnConvert {
+    -fx-color: #2ecc71; /* Vert émeraude */
+}
+
+#btnDivide, #btnMultiply, #btnMinus, #btnPlus, #btnFraction {
     -fx-color: #FFA500;
 }
 

@@ -20,7 +20,7 @@ import java.util.List;
 public final class Times extends Operation
  {
 
-  /**
+     /**
    * Class constructor specifying a number of Expressions to multiply,
    * as well as the Notation used to represent the operation.
    *
@@ -51,4 +51,5 @@ public final class Times extends Operation
     }
     return new MyNumber( (double) l.getValue() * r.getValue());
   }
+
  }

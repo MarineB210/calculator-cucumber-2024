@@ -9,10 +9,9 @@ import java.util.List;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
- * which are a special kind of Expressions, just like numbers are.
+ * which are a special kind of Expressions.
  *
  * @see Expression
- * @see MyNumber
  */
 public abstract class Operation implements Expression
 {
@@ -76,6 +75,15 @@ public abstract class Operation implements Expression
    public abstract MyNumber op(MyNumber l, MyNumber r);
     // the operation itself is specified in the subclasses
 
+	/**
+	 * Method representing the actual unary arithmetic operation to compute
+	 * @param l	an argument of the binary operation
+	 * @return	result of computing the unary operation
+	 */
+	public MyNumber op(MyNumber l) {
+		return l;
+	}
+
 	/** Add more parameters to the existing list of parameters
 	 *
 	 * @param params	The list of parameters to be added
@@ -128,14 +136,5 @@ public abstract class Operation implements Expression
 		result = prime * result + symbol.hashCode();
 		result = prime * result + args.hashCode();
 		return result;
-	}
-
-	/**
-	 * Abstract method representing the actual unary arithmetic operation to compute
-	 * @param l	 a argument of the binary operation
-	 * @return	result of computing the unary operation
-	 */
-	public MyNumber op(MyNumber l) {
-		return l;
 	}
 }

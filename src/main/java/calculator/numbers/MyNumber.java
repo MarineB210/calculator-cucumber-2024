@@ -1,14 +1,12 @@
 package calculator.numbers;
 
-import calculator.Operation;
 import visitor.Visitor;
 
 /**
  * MyNumber is a concrete class that represents arithmetic numbers,
- * which are a special kind of Expressions, just like operations are.
+ * which are a special kind of Expressions.
  *
  * @see Expression
- * @see Operation
  */
 public class MyNumber implements Expression
 {

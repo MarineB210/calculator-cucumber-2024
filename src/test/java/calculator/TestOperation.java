@@ -9,7 +9,9 @@ import calculator.operators.Divides;
 import calculator.operators.Minus;
 import calculator.operators.Plus;
 import org.junit.jupiter.api.*;
-import visitor.CountingVisitor;
+import visitor.CountingNumbersVisitor;
+import visitor.CountingOperationsVisitor;
+import visitor.DepthVisitor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,24 +37,21 @@ class TestOperation {
 
 	@Test
 	void testCountDepth() {
-		CountingVisitor cv = new CountingVisitor();
-		cv.setMode(Counting.DEPTH);
+		DepthVisitor cv = new DepthVisitor();
 		o.accept(cv);
 		assertEquals(2, cv.getValue());
 	}
 
 	@Test
 	void testCountOps() {
-		CountingVisitor cv = new CountingVisitor();
-		cv.setMode(Counting.COUNT_OPS);
+		CountingOperationsVisitor cv = new CountingOperationsVisitor();
 		o.accept(cv);
 		assertEquals(3, cv.getValue());
 	}
 
 	@Test
 	void testCountNbs() {
-		CountingVisitor cv = new CountingVisitor();
-		cv.setMode(Counting.COUNT_NBS);
+		CountingNumbersVisitor cv = new CountingNumbersVisitor();
 		o.accept(cv);
 		assertEquals(Integer.valueOf(6), cv.getValue());
 	}

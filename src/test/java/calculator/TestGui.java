@@ -1,5 +1,6 @@
 package calculator;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+
+import java.util.Optional;
 
 @ExtendWith(ApplicationExtension.class)
 public class TestGui {
@@ -226,13 +229,19 @@ public class TestGui {
         Assertions.assertEquals(72, display.getFont().getSize());
     }
 
-    /*@Test
-    void testComplexModeChange(FxRobot fxRobot){
-        Button btnDelete = fxRobot.lookup("#btnDelete").queryAs(Button.class);
-        Assertions.assertNotNull(btnDelete, "btnDelete should be present");
+    @Test
+    void testConversionsModeChange(FxRobot fxRobot){
+        Optional<Button> btnCommaOptional = fxRobot.lookup("#btnComma").tryQuery();
+        Assertions.assertTrue(btnCommaOptional.isPresent());
+        Optional<Button> btnConvertOptional = fxRobot.lookup("#btnConvert").tryQuery();
+        Assertions.assertFalse(btnConvertOptional.isPresent());
+
         fxRobot.clickOn("#modeMenu");
-        fxRobot.clickOn("#complexMode");
-        Button btnExtension = fxRobot.lookup("#btnExtension").queryAs(Button.class);
-        Assertions.assertNotNull(btnExtension, "btnExtension should be present");
-    }*/
+        fxRobot.clickOn("#conversionsMode");
+
+        btnCommaOptional = fxRobot.lookup("#btnComma").tryQuery();
+        Assertions.assertFalse(btnCommaOptional.isPresent());
+        btnConvertOptional = fxRobot.lookup("#btnConvert").tryQuery();
+        Assertions.assertTrue(btnConvertOptional.isPresent());
+    }
 }
