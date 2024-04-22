@@ -1,6 +1,5 @@
 package calculator.controller.components;
 
-import com.sun.javafx.geom.Dimension2D;
 import javafx.scene.control.TextField;
 
 public interface ModeController {

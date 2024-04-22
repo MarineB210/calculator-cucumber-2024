@@ -56,7 +56,7 @@
                <Font name="Avenir Black" size="36.0" />
             </font>
          </Button>
-         <Button fx:id="btnDivide" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDivide" prefHeight="81.0" prefWidth="120.0" text="÷" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+         <Button fx:id="btnDivide" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onDivide" prefHeight="81.0" prefWidth="120.0" text="/" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
             <font>
                <Font name="Avenir Black" size="36.0" />
             </font>

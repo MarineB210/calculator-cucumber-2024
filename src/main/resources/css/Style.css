@@ -2,7 +2,7 @@
     -fx-color: white;
 }
 
-#btnOpenParenthesis, #btnCloseParenthesis, #btnComma, #btnExtension1, #btnExtension2, #btnExtension3, #btnExtension4, #btnExtension5 {
+#btnOpenParenthesis, #btnCloseParenthesis, #btnComma, #btnFraction, #btnExtension1, #btnExtension2, #btnExtension3, #btnExtension4, #btnExtension5 {
     -fx-color: #bdc3c7; /* Gris clair */
 }
 
@@ -10,10 +10,24 @@
     -fx-color: #FF6347; /* Rouge tomate */
 }
 
-#btnDivide, #btnMultiply, #btnMinus, #btnPlus, #btnFraction {
+#btnConvert {
+    -fx-color: #2ecc71; /* Vert émeraude */
+}
+
+#btnDivide, #btnMultiply, #btnMinus, #btnPlus {
     -fx-color: #FFA500;
 }
 
-#btn0, #btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8, #btn9, #btnEquals, #btnDelete {
+#btn0, #btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8, #btn9, #btnEquals, #btnDelete{
     -fx-color: #ecf0f1; /* Gris très clair */
+}
+
+#btnSqrt,#btnE{
+    -fx-color: #bdc3c7; /* Gris clair */
+
+}
+
+#btnI,#btnModulus ,#btnCartesianForm, #btnPolarForm, #btnEForm, #btnCis {
+    -fx-color: #bdc3c7; /* Gris clair */
+
 }

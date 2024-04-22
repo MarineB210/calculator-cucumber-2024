@@ -10,14 +10,18 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import visitor.ParserVisitor;
 
+/**
+ * This class is the parser used by the calculator to evaluate the arithmetic expressions
+ */
 public class Parser {
 
     public final Calculator c;
     private final ParseTree tree;
 
     /**
-     * This is the constructor of the class
-     * @param expression a string who represent the expression
+     * This constructor creates a parser for the arithmetic expression
+     * @param expression the expression to parse
+     * @param c the calculator used to evaluate the expression
      */
     public Parser(String expression, Calculator c){
         this.c = c;
@@ -29,7 +33,8 @@ public class Parser {
     }
 
     /**
-     * This method evaluate the expression
+     * This method evaluates the expression using the visitor design pattern
+     * and returns its result
      * @return the result of the expression
      */
     public MyNumber evaluate(){

@@ -9,10 +9,9 @@ import java.util.List;
 
 /**
  * Operation is an abstract class that represents arithmetic operations,
- * which are a special kind of Expressions, just like numbers are.
+ * which are a special kind of Expressions.
  *
  * @see Expression
- * @see MyNumber
  */
 public abstract class Operation implements Expression
 {
@@ -30,8 +29,6 @@ public abstract class Operation implements Expression
    * The neutral element of the operation (e.g. 1 for *, 0 for +)
    */
   protected int neutral;
-
-  String errorMessage = "Error in counting numbers";
 
   /** It is not allowed to construct an operation with a null list of expressions.
    * Note that it is allowed to have an EMPTY list of arguments.
@@ -75,6 +72,15 @@ public abstract class Operation implements Expression
 	 */
    public abstract MyNumber op(MyNumber l, MyNumber r);
     // the operation itself is specified in the subclasses
+
+	/**
+	 * Method representing the actual unary arithmetic operation to compute
+	 * @param l	an argument of the binary operation
+	 * @return	result of computing the unary operation
+	 */
+	public MyNumber op(MyNumber l) {
+		return l;
+	}
 
 	/** Add more parameters to the existing list of parameters
 	 *

@@ -12,10 +12,6 @@ import java.util.ResourceBundle;
 
 public class StandardModeController implements Initializable, ModeController {
 
-    // TODO : Vérifier, utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
-    //  à l'intérieur de la classe de contrôleur.
-    // TODO : Traduire en anglais si jamais il y a du français
-
     @FXML
     private TextField display, expression;
     @FXML
@@ -28,7 +24,9 @@ public class StandardModeController implements Initializable, ModeController {
     private boolean resetDisplay = false;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Nothing to do here
+    }
 
     // Button click event handlers
     @FXML

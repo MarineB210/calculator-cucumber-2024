@@ -78,4 +78,15 @@ class TestMinus {
 		assertThrows(IllegalConstruction.class, () -> op = new Minus(params));
 	}
 
+	@Test
+	void testMinusANumber() {
+		List<Expression> params = Arrays.asList(new MyNumber(value1));
+		try {
+			assertEquals(new MyNumber(-value1), new Minus(params).op(new MyNumber(value1)));
+		} catch (IllegalConstruction e) {
+			fail();
+		}
+	}
+
+
 }

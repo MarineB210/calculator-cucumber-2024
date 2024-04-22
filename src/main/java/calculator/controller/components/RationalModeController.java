@@ -1,57 +1,40 @@
 package calculator.controller.components;
 
-import calculator.controller.MainViewController;
+import calculator.Calculator;
+import calculator.RationalParser;
+import calculator.numbers.MyRationalNumber;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.TextField;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RationalModeController implements Initializable {
-    // TODO : Vérifier, utilisez public pour les méthodes de contrôleur qui sont appelées par le fichier FXML,
-    //  et utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
-    //  à l'intérieur de la classe de contrôleur.
+public class RationalModeController implements Initializable, ModeController {
 
-    private static final Logger logger = LoggerFactory.getLogger(MainViewController.class);
-
-    @FXML
-    private CheckMenuItem standardMode, rationalMode;
     @FXML
     private TextField display, expression;
     @FXML
-    private Button btnOpenParenthesis, btnCloseParenthesis, btnComma, btnClear, btnFraction, btnMultiply, btnMinus, btnPlus;
+    private Button btnDivide, btnMultiply, btnMinus, btnPlus, btnEquals, btnFraction; // unused
     @FXML
-    private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnEquals;
+    private Button btnOpenParenthesis, btnCloseParenthesis, btnComma, btnClear, btnRetrieve, btnDelete; // unused
+    @FXML
+    private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9; // unused
 
-    private boolean resetDisplay = true;
+    private boolean resetDisplay = false;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        rationalMode.setSelected(true);
-    }
-    /*public void appendToDisplay(String text) {
-        if (resetDisplay) {
-            expression.appendText(display.getText());
-            display.clear();
-        }
-        display.appendText(text);
-        resetDisplay = false;
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
+
+    // Button click event handlers
+    @FXML
+    public void onNumber(ActionEvent event) {
+        Button button = (Button) event.getSource();
+        appendToDisplay(button.getText());
     }
 
-    public void onEquals() {
-        if (!resetDisplay && !display.getText().equals("0")) {
-            expression.setText(display.getText()+" = ");
-            display.setText("Answer");// TODO : Remplacer "Answer" par le résultat de l'expression
-            resetDisplay = true;
-        }
-    }
-
-    public void onFraction() {
+    public void onDivide() {
         appendToDisplay("/");
     }
 
@@ -67,71 +50,76 @@ public class RationalModeController implements Initializable {
         appendToDisplay("+");
     }
 
-    @FXML
-    public void onNumber(ActionEvent event) {
-        Button button = (Button) event.getSource();
-        appendToDisplay(button.getText());
+    public void onFraction() {
+        appendToDisplay("÷");
     }
 
-    @FXML
-    private void onStandardMode(ActionEvent actionEvent) {
-        try {
-            // Chargement de la nouvelle scène pour le mode complexe
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GuiMainView.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-
-            // Obtention de la scène actuelle et mise à jour avec la nouvelle scène
-            Stage stage = (Stage) ((MenuItem) actionEvent.getSource()).getParentPopup().getOwnerWindow();
-            stage.setScene(scene);
-            stage.show();
-
-            root.requestFocus();
-        } catch (IOException e) {
-            logger.error("Error loading standard mode", e);
-        }    }
-
-    @FXML
-    private void onRationalMode(ActionEvent actionEvent) {
-        // we already are in rational mode
+    public void onEquals() {
+        if (!resetDisplay && !display.getText().equals("0")) {
+            expression.setText(display.getText()+" = ");
+            Calculator calculator = new Calculator();
+            try{
+                RationalParser parser = new RationalParser(display.getText(), calculator);
+                display.setText(((MyRationalNumber)parser.evaluate()).getCanonicalForm().toString());}
+            catch (Exception e){
+                display.setText("NaN");
+            }
+            resetDisplay = true;
+        }
     }
 
-    public void onOpenParenthesis(ActionEvent actionEvent) {
+    public void onOpenParenthesis() {
         appendToDisplay("(");
     }
 
-    public void onCloseParenthesis(ActionEvent actionEvent) {
-        // TODO : interdire la fermeture de parenthèse si aucune ouverture
+    public void onCloseParenthesis() {
         appendToDisplay(")");
     }
 
-    public void onComma(ActionEvent actionEvent) {
-        // TODO : à revoir
+    public void onComma() {
         if (resetDisplay) {
             display.setText("0,");
             resetDisplay = false;
-        } else if (!display.getText().contains(",")) {
+        } else {
             display.appendText(",");
         }
     }
 
-    public void onClear(ActionEvent actionEvent) {
+    public void onClear() {
+        if (resetDisplay) {
+            expression.appendText(display.getText());
+        }
         display.clear();
     }
 
-    public void displayZoomIn() {
-        double size = display.getFont().getSize();
-        if (size < 72) {
-            display.setStyle("-fx-font-size: " + (size + 2) + "px;");
+    // Display event handlers
+    public void appendToDisplay(String text) {
+        if (resetDisplay) {
+            expression.appendText(display.getText());
+            display.clear();
         }
+        display.appendText(text);
+        resetDisplay = false;
     }
 
-    public void displayZoomOut() {
-        double size = display.getFont().getSize();
-        display.setStyle("-fx-font-size: " + (size - 2) + "px;");
+    // Setters
+    @Override
+    public void setDisplayTextField(TextField display) {
+        this.display = display;
     }
 
-    public void displayDefaultZoom() {
-        display.setStyle("-fx-font-size: 72px;");
-    }*/
+    @Override
+    public void setExpressionTextField(TextField expression) {
+        this.expression = expression;
+    }
+
+    @Override
+    public float getPreferredWidth() {
+        return 480;
+    }
+
+    @Override
+    public float getPreferredHeight() {
+        return 640;
+    }
 }

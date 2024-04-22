@@ -50,6 +50,8 @@ class TestTimes {
 		try {
 			Times e = new Times(p);
 			assertEquals(op, e);
+			assertNotEquals(op,null);
+			assertEquals(op,op);
 		}
 		catch(IllegalConstruction e) { fail(); }
 	}

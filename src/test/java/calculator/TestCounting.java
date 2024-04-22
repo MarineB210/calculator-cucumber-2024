@@ -11,7 +11,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import visitor.CountingVisitor;
+import visitor.CountingNumbersVisitor;
+import visitor.CountingOperationsVisitor;
+import visitor.DepthVisitor;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,19 +36,18 @@ class TestCounting {
     @Test
     void testNumberCounting() {
         e = new MyNumber(value1);
+        CountingNumbersVisitor cvNumbers = new CountingNumbersVisitor();
+        CountingOperationsVisitor cvOperations = new CountingOperationsVisitor();
+        DepthVisitor cvDepth = new DepthVisitor();
         //test whether a number has zero depth (i.e. no nested expressions)
-        CountingVisitor cv = new CountingVisitor();
-        cv.setMode(Counting.DEPTH);
-        e.accept(cv);
-        assertEquals( 0, cv.getValue());
+        e.accept(cvDepth);
+        assertEquals( 0, cvDepth.getValue());
         //test whether a number contains zero operations
-        cv.setMode(Counting.COUNT_OPS);
-        e.accept(cv);
-        assertEquals(0, cv.getValue());
+        e.accept(cvOperations);
+        assertEquals(0, cvOperations.getValue());
         //test whether a number contains 1 number
-        cv.setMode(Counting.COUNT_NBS);
-        e.accept(cv);
-        assertEquals(1, cv.getValue());
+        e.accept(cvNumbers);
+        assertEquals(1, cvNumbers.getValue());
     }
 
     @ParameterizedTest
@@ -67,19 +68,18 @@ class TestCounting {
         } catch (IllegalConstruction e) {
             fail();
         }
+        CountingNumbersVisitor cvNumbers = new CountingNumbersVisitor();
+        CountingOperationsVisitor cvOperations = new CountingOperationsVisitor();
+        DepthVisitor cvDepth = new DepthVisitor();
         //test whether a binary operation has depth 1
-        CountingVisitor cv = new CountingVisitor();
-        cv.setMode(Counting.DEPTH);
-        e.accept(cv);
-        assertEquals(1, cv.getValue(),"counting depth of an Operation");
+        e.accept(cvDepth);
+        assertEquals(1, cvDepth.getValue(),"counting depth of an Operation");
         //test whether a binary operation contains 1 operation
-        cv.setMode(Counting.COUNT_OPS);
-        e.accept(cv);
-        assertEquals(1, cv.getValue());
+        e.accept(cvOperations);
+        assertEquals(1, cvOperations.getValue());
         //test whether a binary operation contains 2 numbers
-        cv.setMode(Counting.COUNT_NBS);
-        e.accept(cv);
-        assertEquals(2, cv.getValue());
+        e.accept(cvNumbers);
+        assertEquals(2, cvNumbers.getValue());
     }
 
 }

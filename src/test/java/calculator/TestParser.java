@@ -16,7 +16,6 @@ class TestParser{
     @Test
     void testSum(){
         Calculator calculator = new Calculator();
-
         Parser parser = new Parser("5 + 3",calculator);
         assertEquals(8,parser.evaluate().getValue());
     }
@@ -24,7 +23,6 @@ class TestParser{
     @Test
     void testNestedMul(){
         Calculator calculator = new Calculator();
-
         Parser parser = new Parser("(4+5)*2",calculator);
         assertEquals(18,parser.evaluate().getValue());
     }

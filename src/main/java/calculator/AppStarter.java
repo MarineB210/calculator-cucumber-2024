@@ -1,10 +1,7 @@
 package calculator;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.Set;
-import java.util.HashSet;
 
 import calculator.controller.MainViewController;
 import javafx.application.Application;
@@ -16,10 +13,20 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/** The starter class of the calculator application.
+ * The class extends an abstract superclass Application.
+ * The class is used to start the application when called in the main class.
+ * @see Application
+ * @see Main
+ */
 public class AppStarter extends Application {
 
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    private static final Set<String> operators = new HashSet<>(Arrays.asList("+", "-", "*", "/", "=")); // unused
+    private static final Logger logger = LoggerFactory.getLogger(AppStarter.class);
+
+    /** The start method of the Application class.
+     * The method is used to start the application and load the main view.
+     * @param stage The stage of the application.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -44,6 +51,10 @@ public class AppStarter extends Application {
         }
     }
 
+    /** Add key listeners to the scene.
+     * @param scene The scene to add the key listeners to.
+     * @param mainViewController The controller of the main view.
+     */
     private void addKeyListeners(Scene scene, MainViewController mainViewController) {
         scene.setOnKeyPressed(event -> {
                 // Zoom in/out/default with Ctrl/Cmd + "+/-/O"
@@ -52,7 +63,6 @@ public class AppStarter extends Application {
 
                 if (isModifierDown) {
                     switch (event.getCode()) {
-                        case EQUALS:
                         case ADD:
                             mainViewController.displayZoomIn();
                             break;
@@ -70,19 +80,6 @@ public class AppStarter extends Application {
                 if (event.getCode() == javafx.scene.input.KeyCode.BACK_SPACE) {
                     mainViewController.onDelete();
                 }
-
-                /* String text = event.getText();
-                if (Character.isDigit(text.charAt(0))) {
-                    mainViewController.appendToDisplay(text);
-                } else if (operators.contains(text)) {
-                    if (text.equals("=")) {
-                        mainViewController.onEquals();
-                    } else if (text.equals("/")) {
-                        mainViewController.appendToDisplay("÷");
-                    } else {
-                        mainViewController.appendToDisplay(text);
-                    }
-                } */
             });
     }
 
