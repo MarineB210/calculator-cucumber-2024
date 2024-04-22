@@ -1,14 +1,18 @@
 package calculator.numbers;
 
 import calculator.Operation;
+import calculator.TimeOperation;
 import visitor.Visitor;
 
 /**
- * Expression is an abstract class that represents arithmetic expressions.
- * It has two concrete subclasses Operation and MyNumber.
+ * Expression is an interface that represents the expressions supported by the calculator.
+ * It has multiple implementations such as MyNumber, Operation, MyTime, TimeOperation, MyBool,....
  *
- * @see Operation
  * @see MyNumber
+ * @see Operation
+ * @see MyTime
+ * @see TimeOperation
+ * @see MyBool
  */
 public interface Expression {
    /**

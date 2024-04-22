@@ -4,15 +4,15 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, dev, code-coverage ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, dev ]
 
 jobs:
   build:
     name: building, testing and quality analysis
     runs-on: ubuntu-latest
-
+    
     services:
       xvfb:
         image: selenium/standalone-chrome:latest
@@ -59,14 +59,12 @@ jobs:
       run: |
         git status 
         git log -1
-    
     - name: Commit and push the svg badges and the json coverage summary (if it changed)
       uses: EndBug/add-and-commit@v9
       with:
         default_author: github_actions
         message: 'commit coverage badge and summary'
-        add: '*.svg *.json'
-        
+        add: '*.svg *.json'  
     - name: Upload JaCoCo coverage report
       uses: actions/upload-artifact@v4
       with:

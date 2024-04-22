@@ -1,13 +1,15 @@
 package visitor;
 
+import calculator.TimeOperation;
 import calculator.numbers.Expression;
 import calculator.numbers.MyNumber;
 import calculator.Operation;
+import calculator.numbers.MyTime;
 
 import java.util.ArrayList;
 
 /** Evaluation is a concrete visitor that serves to
- * compute and evaluate the results of arithmetic expressions.
+ * compute and evaluate the results of arithmetic and time expressions.
  */
 public class Evaluator extends Visitor {
 
@@ -37,6 +39,7 @@ public class Evaluator extends Visitor {
         computedValue = n;
     }
 
+
     /** Use the visitor design pattern to visit an operation
      *
      * @param o The operation being visited
@@ -51,11 +54,57 @@ public class Evaluator extends Visitor {
         //second loop to accumulate all the evaluated sub results
         MyNumber temp = evaluatedArgs.getFirst();
         int max = evaluatedArgs.size();
-        for(int counter=1; counter<max; counter++) {
-            temp = o.op(temp,evaluatedArgs.get(counter));
+        if (max == 1) {
+            temp = o.op(temp);
+        }
+        else {
+            for(int counter=1; counter<max; counter++) {
+                temp = o.op(temp, evaluatedArgs.get(counter));
+            }
         }
         // store the accumulated result
         computedValue = temp;
     }
+
+    /** The result of the time evaluation will be stored in this private variable */
+    private MyTime computedTimeValue;
+
+    /** getter method to obtain the result of the time evaluation
+     *
+     * @return a MyTime object containing the result of the evaluation
+     */
+    public MyTime getTimeResult() {
+        return computedTimeValue;
+    }
+
+    /** Use the visitor design pattern to visit a time.
+     *
+     * @param t The time being visited
+     */
+    public void visit(MyTime t) {
+        computedTimeValue = t;
+    }
+
+    /** Use the visitor design pattern to visit a TimeOperation
+     *
+     * @param o The TimeOperation being visited
+     */
+    public void visit(TimeOperation o) {
+        ArrayList<MyTime> evaluatedArgs = new ArrayList<>();
+        //first loop to recursively evaluate each subexpression
+        for(Expression a:o.getArgs()) {
+            a.accept(this);
+            evaluatedArgs.add(computedTimeValue);
+        }
+        //second loop to accumulate all the evaluated sub results
+        MyTime temp = evaluatedArgs.getFirst();
+        int max = evaluatedArgs.size();
+        for(int counter=1; counter<max; counter++) {
+            temp = o.op(temp,evaluatedArgs.get(counter));
+        }
+        // store the accumulated result
+        computedTimeValue = temp;
+    }
+
 
 }

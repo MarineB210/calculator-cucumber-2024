@@ -1,0 +1,20 @@
+.button, .text-field {
+    -fx-color: white;
+}
+
+#btnTimeZone, #btnAM, #btnPM, #btnExtension1, #btnExtension2, #btnExtension3, #btnExtension4, #btnExtension5 {
+    -fx-color: #bdc3c7; /* Gris clair */
+}
+
+#btnClear {
+    -fx-color: #FF6347; /* Rouge tomate */
+}
+
+#btnColon, #btnMinus, #btnPlus, #btnEquals {
+    -fx-color: #FFA500;
+}
+
+#btn0, #btn1, #btn2, #btn3, #btn4, #btn5, #btn6, #btn7, #btn8, #btn9, #btnOpenParenthesis, #btnCloseParenthesis, #btnDelete,
+ #btnUnitFull, #btnUnitDay, #btnUnitHour, #btnUnitMin{
+    -fx-color: #ecf0f1; /* Gris très clair */
+}

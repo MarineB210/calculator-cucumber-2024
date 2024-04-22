@@ -73,4 +73,15 @@ class TestEvaluator {
             fail();
         }
     }
+
+    @Test
+    void testUnaireDefault() {
+        List<Expression> params = Arrays.asList(new MyNumber(value1));
+        try {
+            assertEquals( new MyNumber(value1), calc.eval(new Plus(params)));
+        } catch (IllegalConstruction e) {
+            fail();
+        }
+    }
+
 }
