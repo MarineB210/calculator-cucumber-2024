@@ -152,6 +152,9 @@ public class RationalParserVisitor extends RationalExprBaseVisitor<Expression> {
         Expression number1 = visit(ctx.prefix(0));
         Expression number2 = visit(ctx.prefix(1));
         List<Expression> params = new ArrayList<>(Arrays.asList(number1, number2));
+        for (int i = 2; i < ctx.prefix().size(); i++) {
+            params.add(visit(ctx.prefix(i)));
+        }
         try {
             if (ctx.op.getType() == RationalExprParser.ADD)
                 return c.eval(new Plus(params));
@@ -173,6 +176,9 @@ public class RationalParserVisitor extends RationalExprBaseVisitor<Expression> {
         Expression number1 = visit(ctx.prefix(0));
         Expression number2 = visit(ctx.prefix(1));
         List<Expression> params = new ArrayList<>(Arrays.asList(number1, number2));
+        for (int i = 2; i < ctx.prefix().size(); i++) {
+            params.add(visit(ctx.prefix(i)));
+        }
         try {
             if (ctx.op.getType() == RationalExprParser.MUL)
                 return c.eval(new Times(params));
@@ -227,6 +233,9 @@ public class RationalParserVisitor extends RationalExprBaseVisitor<Expression> {
         Expression number1 = visit(ctx.postfix(0));
         Expression number2 = visit(ctx.postfix(1));
         List<Expression> params = new ArrayList<>(Arrays.asList(number1, number2));
+        for (int i = 2; i < ctx.postfix().size(); i++) {
+            params.add(visit(ctx.postfix(i)));
+        }
         try {
             if (ctx.op.getType() == RationalExprParser.ADD)
                 return c.eval(new Plus(params));
@@ -248,6 +257,9 @@ public class RationalParserVisitor extends RationalExprBaseVisitor<Expression> {
         Expression number1 = visit(ctx.postfix(0));
         Expression number2 = visit(ctx.postfix(1));
         List<Expression> params = new ArrayList<>(Arrays.asList(number1, number2));
+        for (int i = 2; i < ctx.postfix().size(); i++) {
+            params.add(visit(ctx.postfix(i)));
+        }
         try {
             if (ctx.op.getType() == RationalExprParser.MUL)
                 return c.eval(new Times(params));

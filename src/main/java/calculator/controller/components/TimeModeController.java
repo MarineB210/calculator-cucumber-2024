@@ -168,7 +168,7 @@ public class TimeModeController implements Initializable, ModeController {
     // Getters
     @Override
     public float getPreferredWidth() {
-        return 480;
+        return 600;
     }
 
     @Override

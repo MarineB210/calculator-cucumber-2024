@@ -54,7 +54,7 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        modeMenuItems = List.of(standardMode, rationalMode, complexMode, timeMode, conversionsMode);
+        modeMenuItems = List.of(standardMode, rationalMode, complexMode, timeMode, conversionsMode, booleanMode);
         updateMode(STANDARD_MODE);
     }
 

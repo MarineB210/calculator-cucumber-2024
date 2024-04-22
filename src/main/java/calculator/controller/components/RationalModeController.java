@@ -13,10 +13,6 @@ import java.util.ResourceBundle;
 
 public class RationalModeController implements Initializable, ModeController {
 
-    // TODO : Vérifier, utilisez private avec l'annotation @FXML pour les champs et méthodes qui sont utilisés uniquement
-    //  à l'intérieur de la classe de contrôleur.
-    // TODO : Traduire en anglais si jamais il y a du français
-
     @FXML
     private TextField display, expression;
     @FXML

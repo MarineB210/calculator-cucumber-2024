@@ -151,7 +151,7 @@ public class BooleanModeController implements Initializable, ModeController{
 
     @Override
     public float getPreferredWidth() {
-        return 600;
+        return 480;
     }
 
     @Override
